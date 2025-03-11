@@ -1,0 +1,36 @@
+services:
+  app:
+    build:
+      context:  .
+      dockerfile: dockerfiles/web
+    ports:
+      - "8081:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./.env:/var/www/.env
+      - ./vendor:/var/www/vendor
+
+  composer:
+    image: composer
+    command: composer install
+    volumes:
+      - ./:/app
+
+  db1:
+    image: mariadb:latest
+    environment:
+      MARIADB_ROOT_PASSWORD: rootpassword
+      MARIADB_DATABASE: madb
+      MARIADB_USER: user
+      MARIADB_PASSWORD: password
+
+  db2:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: madb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+
+  redis:
+    image: redis:latest
+    container_name: redis
