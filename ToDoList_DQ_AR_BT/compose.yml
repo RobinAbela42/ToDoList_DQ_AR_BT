@@ -16,15 +16,7 @@ services:
     volumes:
       - ./:/app
 
-  db1:
-    image: mariadb:latest
-    environment:
-      MARIADB_ROOT_PASSWORD: rootpassword
-      MARIADB_DATABASE: madb
-      MARIADB_USER: user
-      MARIADB_PASSWORD: password
-
-  db2:
+  db:
     image: postgres:latest
     environment:
       POSTGRES_DB: madb
