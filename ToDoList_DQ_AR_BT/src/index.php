@@ -39,28 +39,29 @@
     }
 
     $list = loadTodoList(pdo: $pdo);
-        
-    usort($list, function($a, $b) {
+
+    usort($list, function ($a, $b) {
         if ($a["estcocher"] !== $b["estcocher"]) {
             return $b["estcocher"] - $a["estcocher"];
         }
         return $a["idelement"] - $b["idelement"];
     });
-        
+
     echo "<section>";
 
     // Vérifier si 'page' existe dans l'URL, sinon par défaut c'est 'home'
     $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
-    if ($page == "home") { 
+    if ($page == "home") {
         echo "<article>
             <h2>Ma TodoList</h2>" . displayTodo($list, $pdo) . "</article>";
-    } elseif ($page == "add") { 
+    } elseif ($page == "add") {
         echo "<article>
             <h2>Ajouter Todo</h2>" . displayTodoForm($pdo) . "</article>";
     }
 
-    function displayMenu() {
+    function displayMenu()
+    {
         // Afficher le menu de navigation
         echo "<ul>
             <li id='homepage' class='cercle'><a href='.?page=home'>Accueil</a></li>
@@ -114,17 +115,19 @@
         </script>";
     }
 
-    function loadTodoList($pdo) {
-        $sql = "SELECT * FROM todo_list.element"; 
+    function loadTodoList($pdo)
+    {
+        $sql = "SELECT * FROM todo_list.element";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute(); 
+        $stmt->execute();
 
         return $stmt->fetchAll();  // Retourne la liste des tâches
     }
 
-    function displayTodoForm($pdo) {
+    function displayTodoForm($pdo)
+    {
         $stmt = $pdo->query("SELECT * FROM todo_list.list");
-        
+
         // Affichage du formulaire pour ajouter une tâche
         echo ("<form action='insert_task.php' method='POST'>
             <label for='nomelement'>Nom de la tâche :</label>
@@ -151,7 +154,7 @@
 
 
     </section>
-    
+
 </body>
 
 </html>
