@@ -1,8 +1,8 @@
 <?php
 
 require_once('db.php');
-function loadTodoList() {
-    $sql = "SELECT * FROM element"; 
+function loadTodoList($pdo) {
+    $sql = "SELECT * FROM todo_list.element"; 
     $stmt = $pdo->prepare($sql);
     $stmt->execute(); 
 
