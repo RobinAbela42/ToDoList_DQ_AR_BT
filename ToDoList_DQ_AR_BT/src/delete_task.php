@@ -36,7 +36,5 @@ if (isset($_POST['idelement'])) {
     } else {
         echo "Erreur lors de la suppression de la tâche.";
     }
-} else {
-    echo "Aucun identifiant de tâche fourni.";
-}
+} 
 ?>

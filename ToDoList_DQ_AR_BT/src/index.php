@@ -40,6 +40,14 @@
 
     $list = loadTodoList(pdo: $pdo);
 
+    $groupedLists = [];
+
+    foreach ($list as $item) {
+        $groupedLists[$item['nomlist']][] = $item;
+    }
+
+
+
     usort($list, function ($a, $b) {
         if ($a["estcocher"] !== $b["estcocher"]) {
             return $b["estcocher"] - $a["estcocher"];
@@ -47,17 +55,22 @@
         return $a["idelement"] - $b["idelement"];
     });
 
-    echo "<section>";
-
     // Vérifier si 'page' existe dans l'URL, sinon par défaut c'est 'home'
     $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
     if ($page == "home") {
-        echo "<article>
-            <h2>Ma TodoList</h2>" . displayTodo($list, $pdo) . "</article>";
+        foreach ($groupedLists as $item) {
+            echo "<section>";
+            echo "<article>
+            <h2>".$item[0]['nomlist']."</h2>" . displayTodo($item, $pdo) . "</article>";
+            echo "</section>";
+        }
+        
     } elseif ($page == "add") {
+        echo "<section>";
         echo "<article>
             <h2>Ajouter Todo</h2>" . displayTodoForm($pdo) . "</article>";
+        echo "</section>";
     }
 
     function displayMenu()
@@ -68,21 +81,22 @@
             <li id='addpage' class='cercle'><a href='.?page=add'>Ajouter</a></li>
         </ul>";
     }
-
     function displayTodo($list, $pdo) {
         // Affichage de la TodoList
         foreach ($list as $key => $value) {
             echo "<table>";
             echo "<tr>";
-            echo "<td><input type='checkbox' class='checkbox' data-id='" . $value['idelement'] . "' " . ($value['estcocher'] == 1 ? "checked" : "") . "></td>";
-            echo "<td>" . $value['nomelement'] . "</td>";
+            echo "<td class='row'>
+                <label class='row' id='element'>
+                    <input type='checkbox' class='checkbox' data-id='" . $value['idelement'] . "' " . ($value['estcocher'] == 1 ? "checked" : "") . ">". $value['nomelement'] . 
+                "</label>";
             // Ajout du bouton de suppression pour chaque tâche
-            echo "<td>
-                    <form action='delete_task.php' method='POST' style='display:inline;'>
-                        <input type='hidden' name='idelement' value='" . $value['idelement'] . "'>
-                        <input type='submit' value='X'>
-                    </form>
-                  </td>";
+            echo "
+                <form action='delete_task.php' method='POST' style='display:inline;'>
+                    <input type='hidden' name='idelement' value='" . $value['idelement'] . "'>
+                    <input type='submit' class='button-24 right' value='X'>
+                </form>
+                </td>";
             echo "</tr>";
             echo "</table>";
         }
@@ -117,7 +131,7 @@
 
     function loadTodoList($pdo)
     {
-        $sql = "SELECT * FROM todo_list.element";
+        $sql = "SELECT * FROM todo_list.element e JOIN todo_list.list l on l.idlist = e.idlist" ;
         $stmt = $pdo->prepare($sql);
         $stmt->execute();
 
@@ -158,3 +172,7 @@
 </body>
 
 </html>
+
+<script>
+
+</script>

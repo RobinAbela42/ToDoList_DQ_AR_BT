@@ -9,8 +9,7 @@ body{
 
 table {
 	border: solid 2px orange;
-	border-collapse: collapse;
-	border-radius: 5px;
+	border-radius: 10px;
 	margin: 15px;
 	
 }
@@ -41,8 +40,14 @@ h1{
 .row{
 	display: flex;
 	flex-direction: row;
+	align-items: center;
 	width: 100%;
 }
+.row form{
+	right :15px;
+	margin-left: auto;
+}
+
 .bin{
 	color: red;
 }
@@ -57,7 +62,6 @@ h1{
 	bottom: 150px;
 	right: 25px;
 }
-
 
 .cercle{
 	height: 100px;
@@ -90,13 +94,15 @@ section{
 }
 
 
-
+.element:hover{
+	
+}
 
 
 /*--------CheckBox--------------*/
 
 :root {
-	--form-control-color: rebeccapurple;
+	--form-control-color: green;
 	--form-control-disabled: #959495;
 }
 
