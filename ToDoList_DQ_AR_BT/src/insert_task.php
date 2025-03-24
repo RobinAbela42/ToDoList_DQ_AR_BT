@@ -1,4 +1,7 @@
 <?php
+
+ob_start();
+
 $host = '51.83.36.122';  // Adresse du serveur PostgreSQL
 $port = '5432';       // Port PostgreSQL (5432 par défaut)
 $dbname = 'DB_Docker_RA_TB_QD';  // Remplacez par le nom de votre base de données
@@ -29,12 +32,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Exécuter la requête pour insérer la tâche dans la base de données
     if ($stmt->execute()) {
-        echo "Tâche ajoutée avec succès!";
-        // Redirection vers la page principale (par exemple index.php)
+        // Redirection vers la page principale après l'insertion
         header("Location: index.php");
-        exit;
+        exit;  // N'oublie pas d'ajouter un exit() pour éviter de continuer l'exécution
     } else {
         echo "Erreur lors de l'ajout de la tâche.";
     }
 }
+
+// Envoie le tampon de sortie (cela affichera tout le contenu du tampon après l'en-tête)
+ob_end_flush();
 ?>
