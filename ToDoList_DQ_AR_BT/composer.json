@@ -10,7 +10,13 @@
     },
     "authors": [
         {
-            "name": "Kevin Gautreau"
+            "name": "Quentin Dacquin"
+        },
+        {
+            "name": "Titouan Barry"
+        },
+        {
+            "name": "Robin Abela"
         }
     ],
     "require": {
