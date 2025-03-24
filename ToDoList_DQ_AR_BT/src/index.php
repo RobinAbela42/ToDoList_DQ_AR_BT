@@ -19,7 +19,7 @@
 
     include "actions.php"; // Execution des actions (chargement, formulaires)
     include "insert_task.php"; // Execution des actions (chargement, formulaires)
-
+    
     // Connexion à la base de données PostgreSQL
     $host = '51.83.36.122';  // Adresse du serveur PostgreSQL
     $port = '5432';       // Port PostgreSQL (5432 par défaut)
@@ -38,28 +38,29 @@
     }
 
     $list = loadTodoList(pdo: $pdo);
-        
-    usort($list, function($a, $b) {
+
+    usort($list, function ($a, $b) {
         if ($a["estcocher"] !== $b["estcocher"]) {
             return $b["estcocher"] - $a["estcocher"];
         }
         return $a["idelement"] - $b["idelement"];
     });
-        
+
     echo "<section>";
 
     // Vérifier si 'page' existe dans l'URL, sinon par défaut c'est 'home'
     $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
-    if ($page == "home") { 
+    if ($page == "home") {
         echo "<article>
             <h2>Ma TodoList</h2>" . displayTodo($list, $pdo) . "</article>";
-    } elseif ($page == "add") { 
+    } elseif ($page == "add") {
         echo "<article>
             <h2>Ajouter Todo</h2>" . displayTodoForm($pdo) . "</article>";
     }
 
-    function displayMenu() {
+    function displayMenu()
+    {
         // Afficher le menu de navigation
         echo "<ul>
             <li id='homepage' class='cercle'><a href='.?page=home'>Accueil</a></li>
@@ -67,26 +68,26 @@
         </ul>";
     }
 
-        function displayTodo($list, $pdo)
-        {
-            //affichage de notre todolist
-            foreach ($list as $key => $value) {
+    function displayTodo($list, $pdo)
+    {
+        //affichage de notre todolist
+        foreach ($list as $key => $value) {
 
-                echo "<table>";
-                echo "<tr>";
-                echo "<td class='row'>
-                    <label class='form-control row' id='checkbox".$value['idelement']."'>
-                        <input type='checkbox' for='checkbox".$value['idelement']."' class='checkbox' data-id='" . $value['idelement'] . "' " . ($value['estcocher'] == 1 ? "checked" : "") . ">
-                             ". $value['nomelement'] ."
+            echo "<table>";
+            echo "<tr>";
+            echo "<td class='row'>
+                    <label class='form-control row' id='checkbox" . $value['idelement'] . "'>
+                        <input type='checkbox' for='checkbox" . $value['idelement'] . "' class='checkbox' data-id='" . $value['idelement'] . "' " . ($value['estcocher'] == 1 ? "checked" : "") . ">
+                             " . $value['nomelement'] . "
                             </label>
                         <button class='right button-24' id='bin'>X</button>
                 </td>";
-                echo "</tr>";
-                echo "</table>";
-            }
-            
-            //Script AJAX pour gérer la mise à jour de nos données
-            echo "
+            echo "</tr>";
+            echo "</table>";
+        }
+
+        //Script AJAX pour gérer la mise à jour de nos données
+        echo "
             <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
             <script>
                 $(document).ready(function() {
@@ -112,20 +113,22 @@
                     });
                 });
             </script>";
-        }
-        
+    }
 
-    function loadTodoList($pdo) {
-        $sql = "SELECT * FROM todo_list.element"; 
+
+    function loadTodoList($pdo)
+    {
+        $sql = "SELECT * FROM todo_list.element";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute(); 
+        $stmt->execute();
 
         return $stmt->fetchAll();  // Retourne la liste des tâches
     }
 
-    function displayTodoForm($pdo) {
+    function displayTodoForm($pdo)
+    {
         $stmt = $pdo->query("SELECT * FROM todo_list.list");
-        
+
         // Affichage du formulaire pour ajouter une tâche
         echo ("<form action='insert_task.php' method='POST'>
             <label for='nomelement'>Nom de la tâche :</label>
@@ -152,7 +155,7 @@
 
 
     </section>
-    
+
 </body>
 
 </html>
