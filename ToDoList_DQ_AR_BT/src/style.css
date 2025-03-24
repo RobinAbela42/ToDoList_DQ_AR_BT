@@ -1,0 +1,17 @@
+
+
+
+table {
+	border: solid 2px orange;
+	border-collapse: collapse;
+}
+th {
+	background-color: orange;
+	padding: 5px;
+	text-align: left;
+	color: white;
+}
+td {
+	padding: 10px;
+}
+
