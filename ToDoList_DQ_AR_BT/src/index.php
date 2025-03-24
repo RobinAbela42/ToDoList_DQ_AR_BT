@@ -35,19 +35,20 @@ global $list;
 function displayTodo($jsp) {
 
 
-        echo "<table>";
-        echo "<tr>";
-        echo "<td><input type='checkbox' name='completed[]' ></td>";
+
+
         // value='" . $row['id'] . "' " . ($row['completed'] ? 'checked' : '') . "
-        foreach($jsp as $key=>$value)
+        foreach($jsp as $key=>$value){
 
+            echo "<table>";
+            echo "<tr>";
+            echo "<td><input type='checkbox' name='completed[]' ></td>";
+            foreach($value as $key=>$ptetre){
 
-            foreach($value as $key=>$ptetre)
+                echo "<td>".$ptetre."</td> ";}
+            echo "</tr>";
+            echo "</table> ";}
 
-                echo "<td>".$ptetre."</td> ";
-
-        echo "</tr>";
-    echo "</table> ";
 }
 
 //lui : *
