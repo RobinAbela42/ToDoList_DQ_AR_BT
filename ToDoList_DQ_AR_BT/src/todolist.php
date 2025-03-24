@@ -14,7 +14,7 @@ function displayTodo($result) {
         echo "<table>";
         echo "<tr>";
         echo "<td><input type='checkbox' name='completed[]' ></td>";
-// value='" . $row['id'] . "' " . ($row['completed'] ? 'checked' : '') . "
+        // echo "<td><input type='checkbox' name='completed[]' value='" . $row['id'] . "' " . ($row['completed'] ? 'checked' : '') . "></td>";
         foreach($row as $key=>$value)
             echo "<td>".$value."</td> ";
 

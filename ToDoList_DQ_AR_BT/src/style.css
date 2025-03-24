@@ -4,14 +4,21 @@
 table {
 	border: solid 2px orange;
 	border-collapse: collapse;
+	margin: 15px;
+
 }
 th {
 	background-color: orange;
 	padding: 5px;
 	text-align: left;
 	color: white;
+	margin: 15px;
+
 }
 td {
 	padding: 10px;
+
+
 }
+
 
