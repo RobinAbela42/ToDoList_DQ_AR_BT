@@ -19,6 +19,7 @@
 
     include "actions.php"; // Execution des actions (chargement, formulaires)
     include "insert_task.php"; // Execution des actions (chargement, formulaires)
+    include "delete_task.php";
 
     // Connexion à la base de données PostgreSQL
     $host = '51.83.36.122';  // Adresse du serveur PostgreSQL
@@ -68,10 +69,17 @@
             echo "<tr>";
             echo "<td><input type='checkbox' class='checkbox' data-id='" . $value['idelement'] . "' " . ($value['estcocher'] == 1 ? "checked" : "") . "></td>";
             echo "<td>" . $value['nomelement'] . "</td>";
+            // Ajout du bouton de suppression pour chaque tâche
+            echo "<td>
+                    <form action='delete_task.php' method='POST' style='display:inline;'>
+                        <input type='hidden' name='idelement' value='" . $value['idelement'] . "'>
+                        <input type='submit' value='X'>
+                    </form>
+                  </td>";
             echo "</tr>";
             echo "</table>";
         }
-
+    
         // Script AJAX pour la mise à jour de la tâche
         echo "
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
@@ -80,7 +88,7 @@
                 $('.checkbox').change(function() {
                     var idelement = $(this).data('id');
                     var estcocher = $(this).is(':checked') ? 1 : 0;  
-
+    
                     $.ajax({
                         url: 'update_task.php',  
                         method: 'POST',
