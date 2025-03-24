@@ -37,13 +37,14 @@
         echo "Erreur de connexion : " . $e->getMessage();
     }
 
-    // Récupérer la liste des tâches
     $list = loadTodoList(pdo: $pdo);
-
         
-        
-        
-        // var_dump($list);
+    usort($list, function($a, $b) {
+        if ($a["estcocher"] !== $b["estcocher"]) {
+            return $b["estcocher"] - $a["estcocher"];
+        }
+        return $a["idelement"] - $b["idelement"];
+    });
         
     echo "<section>";
 
