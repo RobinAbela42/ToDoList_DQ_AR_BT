@@ -79,8 +79,12 @@
                 // Affichage de chaque ligne avec une checkbox
                 echo "<table>";
                 echo "<tr>";
-                echo "<td><input type='checkbox' class='checkbox' data-id='" . $value['idelement'] . "' " . ($value['estcocher'] == 1 ? "checked" : "") . "></td>";
-                echo "<td>" . $value['nomelement'] . "</td>";
+                echo "<td>
+                    <label class='form-control row' id='checkbox".$value['idelement']."'>
+                        <input type='checkbox' for='checkbox".$value['idelement']."' class='checkbox' data-id='" . $value['idelement'] . "' " . ($value['estcocher'] == 1 ? "checked" : "") . ">
+                             ". $value['nomelement'] ."
+                    </label>
+                </td>";
                 echo "</tr>";
                 echo "</table>";
             }
