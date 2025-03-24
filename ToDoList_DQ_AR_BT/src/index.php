@@ -34,41 +34,42 @@
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,  // Active les exceptions en cas d'erreur
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC  // Mode de récupération des données
             ]);
-
-            echo "Connexion réussie à la base de données !";
+#if debug
+            // echo "Connexion réussie à la base de données !";
         } catch (PDOException $e) {
+#if debug
             echo "Erreur de connexion : " . $e->getMessage();
         }
 
-
         $list = loadTodoList(pdo: $pdo);
 
-
+        
+        
         echo "<section>";
         $page = "home";
         $page = $_GET["page"];
         if ($page == "home") { 
             echo "<article>
-            <h1>Ma TodoList</h1>".
-
-            displayTodo( $list,pdo: $pdo)."</article>";
+            <h2>Ma TodoList</h2>".
+            displayTodo( $list, $pdo)."</article>";
         }
-        if ($page == "add") { 
+        elseif ($page == "add") { 
             echo "<article>
                 <h1>Ajouter Todo</h1>
                 ".displayTodoForm($pdo)."
             </article>";
         } 
-
-
+        
+        
         // var_dump($list);
         
 
         function displayMenu()
         {
-            echo "<ul>
-                <li><a href='.?page=home'>Accueil</a></li>
-                <li><a href='.?page=add'>Ajouter</a></li>
+            echo 
+            "<ul>
+                <li id='homepage' class='cercle'><a href='.?page=home'>Accueil</a></li>
+                <li id='addpage' class='cercle'><a href='.?page=add'>Ajouter</a></li>
             </ul>";
         }
 
