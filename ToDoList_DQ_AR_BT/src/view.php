@@ -7,7 +7,7 @@
 </head>
 <body>
 	<header>
-		<h1>Blagues</h1>
+		<h1>TodoList</h1>
 	</header>
 	<nav>
 		<?php displayMenu(); ?>
@@ -18,16 +18,16 @@
 		?>
 		<?php if ($page == "home") { ?>
 		<article>
-			<h1>Les blagues</h1>
-			<?php displayJokes($jokes); ?>
+			<h1>Ma TodoList</h1>
+			<?php displayTodo($jokes); ?>
 		</article>
 		<?php } ?>
 
 
 		<?php if ($page == "add") { ?>
 		<article>
-			<h1>Ajouter une blague</h1>
-			<?php displayJokeForm(); ?>
+			<h1>Ajouter Todo</h1>
+			<?php displayTodoForm(); ?>
 		</article>
 		<?php } ?>
 
