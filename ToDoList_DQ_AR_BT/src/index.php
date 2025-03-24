@@ -18,7 +18,7 @@
     <?php
 
         include "actions.php"; // Execution des actions (chargement, formulaires)
-        include "update_task.php"; // Execution des actions (chargement, formulaires)
+        include "insert_task.php"; // Execution des actions (chargement, formulaires)
 
 
         $host = '51.83.36.122';  // Adresse du serveur PostgreSQL
@@ -55,8 +55,8 @@
         }
         elseif ($page == "add") { 
             echo "<article>
-            <h2>Ajouter Todo</h2>
-            ".displayTodoForm()."
+                <h1>Ajouter Todo</h1>
+                ".displayTodoForm($pdo)."
             </article>";
         } 
         
@@ -75,8 +75,9 @@
 
         function displayTodo($list, $pdo)
         {
+            //affichage de notre todolist
             foreach ($list as $key => $value) {
-                // Affichage de chaque ligne avec une checkbox
+
                 echo "<table>";
                 echo "<tr>";
                 echo "<td>
@@ -89,7 +90,7 @@
                 echo "</table>";
             }
             
-            // Inclure le script AJAX pour gérer la mise à jour sans rafraîchir la page
+            //Script AJAX pour gérer la mise à jour de nos données
             echo "
             <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
             <script>
@@ -137,26 +138,35 @@
         }
 
         
-        function displayTodoForm()
+        function displayTodoForm($pdo)
         {
-
-            echo ("<form method='post' action='actions.php' >
-            <div>
-                <label for='text'>text</label>
-                <input type='text' name='text' id='text'/>
-            </div>
-            <div>
-                <label for='category'>Catégorie</label>
-                <input type='text' name='category' id='category'/>
-            </div>
-            <div>
-                <label></label>
-                <input type='submit' action ='Valider' value='Assigner les valeurs'/>
-            </div>		
-            </form>");
-        }
-        ?>
+            $stmt = $pdo->query("SELECT * FROM todo_list.list");
+            
+            // Affichage du formulaire
+            echo ("<form action='insert_task.php' method='POST'>
+                <label for='nomelement'>Nom de la tâche :</label>
+                <input type='text' id='nomelement' name='nomelement' required><br>
         
+                <label for='estcocher'>Cochée :</label>
+                <input type='checkbox' id='estcocher' name='estcocher' value='1'><br>
+        
+                <label for='idlist'>Choisissez une liste :</label>
+                <select id='idlist' name='idlist' required>");
+        
+            // Remplir le combobox avec les listes
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                echo "<option value='" . $row['idlist'] . "'>" . $row['nomlist'] . "</option>";
+
+            }
+        
+            // Fermer le combobox et le reste du formulaire
+            echo "</select><br>";
+            echo "<input type='submit' value='Ajouter la tâche'>
+            </form>";
+        }
+        
+        ?>
+
 
 
     </section>
