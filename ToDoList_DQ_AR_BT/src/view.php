@@ -19,7 +19,6 @@
 		<?php if ($page == "home") { ?>
 		<article>
 			<h1>Ma TodoList</h1>
-			<?php displayTodo($jokes); ?>
 		</article>
 		<?php } ?>
 
@@ -27,7 +26,6 @@
 		<?php if ($page == "add") { ?>
 		<article>
 			<h1>Ajouter Todo</h1>
-			<?php displayTodoForm(); ?>
 		</article>
 		<?php } ?>
 

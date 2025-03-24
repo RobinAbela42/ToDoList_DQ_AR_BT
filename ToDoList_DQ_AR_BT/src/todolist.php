@@ -6,7 +6,7 @@ function loadTodoList($pdo) {
     $stmt = $pdo->prepare($sql);
     $stmt->execute(); 
 
-    $element = $stmt->fetch_all();  
+    $element = $stmt->fetchAll();  
     return $element;
 
 }
