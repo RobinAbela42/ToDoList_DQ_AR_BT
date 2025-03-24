@@ -12,43 +12,9 @@ function loadTodoList($pdo) {
 }
 
 
-function displayTodo($result) {
-
-    while ($row = pg_fetch_assoc($result)) {
-        echo "<table>";
-        echo "<tr>";
-        echo "<td><input type='checkbox' name='completed[]' ></td>";
-// value='" . $row['id'] . "' " . ($row['completed'] ? 'checked' : '') . "
-        foreach($row as $key=>$value)
-            echo "<td>".$value."</td> ";
-
-        echo "</tr>";
-    }
-    echo "</table> ";
-    
-}
-
-
-function displayTodoForm() {
-
-    echo("<form method='post' action='actions.php' >
-    <div>
-        <label for='text'>text</label>
-        <input type='text' name='text' id='text'/>
-    </div>
-    <div>
-        <label for='category'>Catégorie</label>
-        <input type='text' name='category' id='category'/>
-    </div>
-    <div>
-        <label></label>
-        <input type='submit' action ='Valider' value='Assigner les valeurs'/>
-    </div>		
-    </form>");
 
 
 
-}
 
 function insertTodo($text,$category) {
     echo"<h2>La blague ".$text." </h2>";
