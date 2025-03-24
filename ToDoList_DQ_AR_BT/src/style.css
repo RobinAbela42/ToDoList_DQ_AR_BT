@@ -51,17 +51,7 @@ h1{
 .bin{
 	color: red;
 }
-#addpage{
-	position: fixed;
-	bottom: 25px;
-	right: 25px;
-}
 
-#homepage{
-	position: fixed;
-	bottom: 150px;
-	right: 25px;
-}
 
 .cercle{
 	height: 100px;
@@ -86,6 +76,7 @@ h1{
 
 section{
 	background-color: rgba(255, 165, 0, 0.5);
+	margin: 35px;
 	padding: 35px;
 	border-radius:25px ;
 	display: flex;
@@ -94,10 +85,24 @@ section{
 }
 
 
-.element:hover{
-	
+
+/****************ID*********************/
+
+#addpage{
+	position: fixed;
+	bottom: 25px;
+	right: 25px;
 }
 
+#homepage{
+	position: fixed;
+	bottom: 150px;
+	right: 25px;
+}
+#listcontainer{
+	display: inline-flex;
+	margin: 50px;
+}
 
 /*--------CheckBox--------------*/
 

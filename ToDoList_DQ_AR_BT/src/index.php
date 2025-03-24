@@ -46,8 +46,6 @@
         $groupedLists[$item['nomlist']][] = $item;
     }
 
-
-
     usort($list, function ($a, $b) {
         if ($a["estcocher"] !== $b["estcocher"]) {
             return $b["estcocher"] - $a["estcocher"];
@@ -58,6 +56,7 @@
     // Vérifier si 'page' existe dans l'URL, sinon par défaut c'est 'home'
     $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
+    echo "<div id='listcontainer'>";
     if ($page == "home") {
         foreach ($groupedLists as $item) {
             echo "<section>";
@@ -69,10 +68,11 @@
     } elseif ($page == "add") {
         echo "<section>";
         echo "<article>
-            <h2>Ajouter Todo</h2>" . displayTodoForm($pdo) . "</article>";
+        <h2>Ajouter Todo</h2>" . displayTodoForm($pdo) . "</article>";
         echo "</section>";
     }
-
+    echo "</div>";
+    
     function displayMenu()
     {
         // Afficher le menu de navigation
