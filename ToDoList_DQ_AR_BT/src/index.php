@@ -49,6 +49,7 @@
         if ($page == "home") { 
             echo "<article>
             <h1>Ma TodoList</h1>".
+
             displayTodo( $list)."</article>";
         }
         if ($page == "add") { 
@@ -78,7 +79,8 @@
                 echo "<table>";
                 echo "<tr>";
                 echo "<form method='post'>";
-                echo "<td><input type='checkbox' name='completed[]' ></td>";
+                
+                echo "<td><input type='checkbox' name='accept' ".($value['estcocher'] == 1 ? "checked" : "")."></td>";
                 echo "<td>".$value['nomelement']."</td>";
                 echo "</form>";
                 echo "</tr>";
@@ -121,7 +123,7 @@
             </form>");
         }
         ?>
-
+        
 
 
     </section>
