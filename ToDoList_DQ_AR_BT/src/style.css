@@ -41,7 +41,10 @@ h1{
 .row{
 	display: flex;
 	flex-direction: row;
-
+	width: 100%;
+}
+.bin{
+	color: red;
 }
 #addpage{
 	position: fixed;
@@ -103,6 +106,10 @@ section{
 box-sizing: border-box;
 }
 
+.right{
+	right: 5px;
+}
+
 
 input[type="checkbox"] {
 	/* Add if not using autoprefixer */
@@ -112,7 +119,7 @@ input[type="checkbox"] {
 	/* For iOS < 15 */
 	background-color: var(--form-background);
 	/* Not removed via appearance */
-	margin: 0;
+	margin: 0 15px 0 0;
   
 	font: inherit;
 	color: currentColor;
@@ -154,3 +161,41 @@ input[type="checkbox"] {
 	color: var(--form-control-disabled);
 	cursor: not-allowed;
   }
+
+/* CSS */
+.button-24 {
+  background: #FF4742;
+  border: 1px solid #FF4742;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 20px;
+  outline: 0;
+  margin: 0 0 0 15px;
+  padding: 5px 9px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.button-24:hover,
+.button-24:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #FF4742;
+}
+
+.button-24:active {
+  opacity: .5;
+}

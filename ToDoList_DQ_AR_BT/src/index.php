@@ -38,9 +38,15 @@
         echo "Erreur de connexion : " . $e->getMessage();
     }
 
-    // Récupérer la liste des tâches
     $list = loadTodoList(pdo: $pdo);
-
+        
+    usort($list, function($a, $b) {
+        if ($a["estcocher"] !== $b["estcocher"]) {
+            return $b["estcocher"] - $a["estcocher"];
+        }
+        return $a["idelement"] - $b["idelement"];
+    });
+        
     echo "<section>";
 
     // Vérifier si 'page' existe dans l'URL, sinon par défaut c'est 'home'
@@ -51,7 +57,7 @@
             <h2>Ma TodoList</h2>" . displayTodo($list, $pdo) . "</article>";
     } elseif ($page == "add") { 
         echo "<article>
-            <h1>Ajouter Todo</h1>" . displayTodoForm($pdo) . "</article>";
+            <h2>Ajouter Todo</h2>" . displayTodoForm($pdo) . "</article>";
     }
 
     function displayMenu() {
@@ -141,6 +147,8 @@
         </form>";
     }
     ?>
+
+
 
     </section>
     
