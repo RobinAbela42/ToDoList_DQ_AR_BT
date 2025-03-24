@@ -18,7 +18,8 @@
     <?php
 
         include "actions.php"; // Execution des actions (chargement, formulaires)
-        
+        include "update_task.php"; // Execution des actions (chargement, formulaires)
+
 
         $host = '51.83.36.122';  // Adresse du serveur PostgreSQL
         $port = '5432';       // Port PostgreSQL (5432 par défaut)
@@ -50,7 +51,7 @@
             echo "<article>
             <h1>Ma TodoList</h1>".
 
-            displayTodo( $list)."</article>";
+            displayTodo( $list,pdo: $pdo)."</article>";
         }
         if ($page == "add") { 
             echo "<article>
@@ -71,22 +72,49 @@
             </ul>";
         }
 
-        function displayTodo($list)
+        function displayTodo($list, $pdo)
         {
-            // value='" . $row['id'] . "' " . ($row['completed'] ? 'checked' : '') . "
             foreach ($list as $key => $value) {
-
+                // Affichage de chaque ligne avec une checkbox
                 echo "<table>";
                 echo "<tr>";
-                echo "<form method='post'>";
-                
-                echo "<td><input type='checkbox' name='accept' ".($value['estcocher'] == 1 ? "checked" : "")."></td>";
-                echo "<td>".$value['nomelement']."</td>";
-                echo "</form>";
+                echo "<td><input type='checkbox' class='checkbox' data-id='" . $value['idelement'] . "' " . ($value['estcocher'] == 1 ? "checked" : "") . "></td>";
+                echo "<td>" . $value['nomelement'] . "</td>";
                 echo "</tr>";
-                echo "</table> ";
+                echo "</table>";
             }
+            
+            // Inclure le script AJAX pour gérer la mise à jour sans rafraîchir la page
+            echo "
+            <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'></script>
+            <script>
+                $(document).ready(function() {
+                    $('.checkbox').change(function() {
+                        var idelement = $(this).data('id');
+                        var estcocher = $(this).is(':checked') ? 1 : 0;  
+                        
+                        $.ajax({
+                            url: 'update_task.php',  
+                            method: 'POST',
+                            data: {
+                                idelement: idelement,
+                                estcocher: estcocher
+                            },
+                            success: function(response) {
+                                
+                                console.log('Mise à jour réussie');
+                            },
+                            error: function() {
+                                alert('Erreur lors de la mise à jour');
+                            }
+                        });
+                    });
+                });
+            </script>";
         }
+        
+        
+        
 
 
         function loadTodoList($pdo) {
