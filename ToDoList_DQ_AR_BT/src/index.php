@@ -26,26 +26,51 @@ try {
     echo "Erreur de connexion : " . $e->getMessage();
 }
 
+global $list;
+ $list = loadTodoList($pdo);
 
-$list = loadTodoList($pdo);
-
-var_dump($list);
+// var_dump($list);
 
 
-function displayTodo() {
+function displayTodo($jsp) {
 
-    while ($row = pg_fetch_assoc($result)) {
+
         echo "<table>";
         echo "<tr>";
         echo "<td><input type='checkbox' name='completed[]' ></td>";
         // value='" . $row['id'] . "' " . ($row['completed'] ? 'checked' : '') . "
-        foreach($row as $key=>$value)
-            echo "<td>".$value."</td> ";
+        foreach($jsp as $key=>$value)
+
+
+            foreach($value as $key=>$ptetre)
+
+                echo "<td>".$ptetre."</td> ";
 
         echo "</tr>";
-    }
     echo "</table> ";
 }
+
+//lui : *
+// function displayTodo($jsp) {
+//     echo "<table>";
+//     echo "<tr>";
+//     echo "<td><input type='checkbox' name='completed[]'></td>";
+
+//     foreach($jsp as $key => $value) {
+//         // Si $value est un tableau, on l'affiche en tant que chaîne avec print_r
+//         if (is_array($value)) {
+//             echo "<td>" . implode(", ", $value) . "</td>"; // Affiche chaque élément du tableau, séparé par une virgule
+//         } else {
+//             echo "<td>" . htmlspecialchars($value) . "</td>"; // Affiche la valeur proprement
+//         }
+//     }
+
+//     echo "</tr>";
+//     echo "</table>";
+// }
+
+
+displayTodo($list);
 
 function displayTodoForm() {
 
