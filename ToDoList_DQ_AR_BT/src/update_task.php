@@ -1,5 +1,4 @@
 <?php
-// Connexion à la base de données (PDO)
 $host = '51.83.36.122';  // Adresse du serveur PostgreSQL
 $port = '5432';       // Port PostgreSQL (5432 par défaut)
 $dbname = 'DB_Docker_RA_TB_QD';  // Remplacez par le nom de votre base de données
