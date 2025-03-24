@@ -51,7 +51,7 @@
         if ($page == "home") { 
             echo "<article>
             <h2>Ma TodoList</h2>".
-            displayTodo( $list)."</article>";
+            displayTodo( $list, $pdo)."</article>";
         }
         elseif ($page == "add") { 
             echo "<article>
