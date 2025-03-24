@@ -2,8 +2,12 @@
 
 require_once('db.php');
 function loadTodoList() {
-    $result = pg_query('select * from barryt.jokes');
-    return $result;
+    $sql = "SELECT * FROM element"; 
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(); 
+
+    $element = $stmt->fetch_all();  
+    return $element;
 
 }
 
@@ -14,7 +18,7 @@ function displayTodo($result) {
         echo "<table>";
         echo "<tr>";
         echo "<td><input type='checkbox' name='completed[]' ></td>";
-        // echo "<td><input type='checkbox' name='completed[]' value='" . $row['id'] . "' " . ($row['completed'] ? 'checked' : '') . "></td>";
+// value='" . $row['id'] . "' " . ($row['completed'] ? 'checked' : '') . "
         foreach($row as $key=>$value)
             echo "<td>".$value."</td> ";
 
@@ -49,7 +53,6 @@ function displayTodoForm() {
 function insertTodo($text,$category) {
     echo"<h2>La blague ".$text." </h2>";
     echo"<h2>the category ".$category." </h2>";
-    pg_query("insert into jokes(texte,category) values('$texte','$categorie')");
 }
 
 
