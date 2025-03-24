@@ -55,7 +55,7 @@
         }
         elseif ($page == "add") { 
             echo "<article>
-                <h1>Ajouter Todo</h1>
+                <h2>Ajouter Todo</h2>
                 ".displayTodoForm($pdo)."
             </article>";
         } 
@@ -80,11 +80,12 @@
 
                 echo "<table>";
                 echo "<tr>";
-                echo "<td>
+                echo "<td class='row'>
                     <label class='form-control row' id='checkbox".$value['idelement']."'>
                         <input type='checkbox' for='checkbox".$value['idelement']."' class='checkbox' data-id='" . $value['idelement'] . "' " . ($value['estcocher'] == 1 ? "checked" : "") . ">
                              ". $value['nomelement'] ."
-                    </label>
+                            </label>
+                        <button class='right button-24' id='bin'>X</button>
                 </td>";
                 echo "</tr>";
                 echo "</table>";
