@@ -1,18 +1,20 @@
 <?php
 
 require_once('db.php');
-function loadJokes() {
+function loadTodoList() {
     $result = pg_query('select * from barryt.jokes');
     return $result;
 
 }
 
 
-function displayJokes($result) {
+function displayTodo($result) {
 
     while ($row = pg_fetch_assoc($result)) {
         echo "<table>";
         echo "<tr>";
+        echo "<td><input type='checkbox' name='completed[]' ></td>";
+// value='" . $row['id'] . "' " . ($row['completed'] ? 'checked' : '') . "
         foreach($row as $key=>$value)
             echo "<td>".$value."</td> ";
 
@@ -23,7 +25,7 @@ function displayJokes($result) {
 }
 
 
-function displayJokeForm() {
+function displayTodoForm() {
 
     echo("<form method='post' action='actions.php' >
     <div>
@@ -44,20 +46,20 @@ function displayJokeForm() {
 
 }
 
-function insertJoke($text,$category) {
+function insertTodo($text,$category) {
     echo"<h2>La blague ".$text." </h2>";
     echo"<h2>the category ".$category." </h2>";
     pg_query("insert into jokes(texte,category) values('$texte','$categorie')");
 }
 
 
-function deleteJoke($idjoke) {
+// function deleteJoke($idjoke) {
 	
-}
+// }
 
 
 
-function updateJoke($idjoke, $text, $category) {
+// function updateJoke($idjoke, $text, $category) {
 	
 
-}
+// }
