@@ -51,25 +51,6 @@ function displayTodo($jsp) {
 
 }
 
-//lui : *
-// function displayTodo($jsp) {
-//     echo "<table>";
-//     echo "<tr>";
-//     echo "<td><input type='checkbox' name='completed[]'></td>";
-
-//     foreach($jsp as $key => $value) {
-//         // Si $value est un tableau, on l'affiche en tant que chaîne avec print_r
-//         if (is_array($value)) {
-//             echo "<td>" . implode(", ", $value) . "</td>"; // Affiche chaque élément du tableau, séparé par une virgule
-//         } else {
-//             echo "<td>" . htmlspecialchars($value) . "</td>"; // Affiche la valeur proprement
-//         }
-//     }
-
-//     echo "</tr>";
-//     echo "</table>";
-// }
-
 
 displayTodo($list);
 
